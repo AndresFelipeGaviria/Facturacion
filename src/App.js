@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Login from './pages/login';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-// import DashboardApp from './pages/dashboard';
+import DashboardApp from './pages/dashboard';
 
 
 function App() {
@@ -15,11 +15,11 @@ function App() {
               path="/"
               component={Login}
             />
-            {/* <Route
+            <Route
               
               path="/dashboard"
               component={DashboardApp}
-            /> */}
+            /> 
            
           </Switch>
       </BrowserRouter>
