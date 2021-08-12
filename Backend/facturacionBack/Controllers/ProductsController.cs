@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using facturacionBack.Data;
+using facturacionBack.Dto;
+using facturacionBack.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,81 +12,77 @@ using System.Threading.Tasks;
 
 namespace facturacionBack.Controllers
 {
-    public class ProductsController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ProductsController : ControllerBase
     {
-        // GET: ProductsController
-        public ActionResult Index()
+        private readonly FacturaContexto _facturaContexto;
+        private readonly IMapper _mapper;
+
+        public ProductsController(FacturaContexto facturaContexto, IMapper mapper)
         {
-            return View();
+            _mapper = mapper;
+            _facturaContexto = facturaContexto;
         }
 
-        // GET: ProductsController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
         {
-            return View();
-        }
+            var rs_product = await _facturaContexto.Products.ToListAsync();
+            var map_prod = _mapper.Map<IEnumerable<ProductDto>>(rs_product);
 
-        // GET: ProductsController/Create
-        public ActionResult Create()
+            return Ok(map_prod);
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ProductDto>> GetProduct(int id)
         {
-            return View();
-        }
+            var productItem = await _facturaContexto.Products.FindAsync(id);
 
-        // POST: ProductsController/Create
+            if (productItem == null)
+            {
+                return NotFound();
+            }
+            var map_produc = _mapper.Map<ProductDto>(productItem);
+            return Ok(map_produc);
+        }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult<ProductDto>> PostProduct(ProductDto item)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            var map_produ = _mapper.Map<Product>(item);
+            _facturaContexto.Products.Add(map_produ);
+            await _facturaContexto.SaveChangesAsync();
 
-        // GET: ProductsController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
+            return CreatedAtAction(nameof(GetProduct), new { id = item.Id }, item);
         }
-
-        // POST: ProductsController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        [HttpPut("{id}")]
+        public async Task<ActionResult> PutProduct(int id, ProductRequestDto item)
         {
-            try
+            var prod = await _facturaContexto.Products.FindAsync(id);
+            if (prod == null)
             {
-                return RedirectToAction(nameof(Index));
+                return BadRequest();
             }
-            catch
-            {
-                return View();
-            }
+
+            prod.Name = item.Name;
+            prod.Price = item.Price;
+
+            _facturaContexto.Entry(prod).State = EntityState.Modified;
+            await _facturaContexto.SaveChangesAsync();
+
+            return NoContent();
         }
-
-        // GET: ProductsController/Delete/5
-        public ActionResult Delete(int id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteProduct(int id)
         {
-            return View();
-        }
+            var ProductItem = await _facturaContexto.Products.FindAsync(id);
+            if (ProductItem == null)
+            {
+                return NotFound();
+            }
+            _facturaContexto.Products.Remove(ProductItem);
+            await _facturaContexto.SaveChangesAsync();
 
-        // POST: ProductsController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return NoContent();
         }
     }
 }
