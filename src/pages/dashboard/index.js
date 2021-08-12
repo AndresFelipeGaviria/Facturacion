@@ -20,6 +20,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import Users from '../usuarios'
+import Products from '../productos'
 import Logo from '../../img/Logo.jpg';
 import { useHistory, Route,Switch, useRouteMatch } from "react-router-dom";
 
@@ -184,7 +185,7 @@ const  DashboardApp=(props) =>{
           <ListItem button key={2}>
             <ListItemIcon> <InboxIcon /> </ListItemIcon>
             <ListItemText primary='Productos' 
-            onClick={() => history.push('/dashboard/radicado-detalle')}
+            onClick={() => history.push('/dashboard/products')}
             />
           </ListItem>
         <Divider />
@@ -200,6 +201,11 @@ const  DashboardApp=(props) =>{
           exact
           path={`${path}/users`}
           component={Users}
+        />
+          <Route
+            exact
+            path={`${path}/products`}
+            component={Products}
         />
 
       </Switch>

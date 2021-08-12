@@ -111,15 +111,14 @@ const useStyles = makeStyles((theme) => ({
     
   }));
 
-const CrearUsuario = () => {
+const CrearProducto = () => {
 
     const classes = useStyles();
 
   
   const schema = yup.object().shape({
     name: yup.string().required('Campo requerido'),
-    telephone: yup.string().required('Campo requerido'),
-    address: yup.string().required('Campo requerido')
+    price: yup.string().required('Campo requerido'),
 });
 
   const { register, handleSubmit, control,  errors, setValue } = useForm({
@@ -133,11 +132,10 @@ const CrearUsuario = () => {
 
     const inforUser = {
       name: info.name,
-      telephone: parseInt(info.telephone),
-      address: info.address,
+      price: parseInt(info.price),
     }
-    console.log(info)
-    axios.post('https://localhost:44320/api/Clients/', inforUser)
+    
+    axios.post('https://localhost:44320/api/Products/', inforUser)
     .then((response) =>console.log(response.status))
     .catch((error) =>console.log(error))
    
@@ -175,36 +173,17 @@ const CrearUsuario = () => {
                 inputRef={register}
                 variant="outlined"
                 type="number"
-                placeholder = 'Telefono'
-                label = "Telefono"
+                placeholder = 'Precio'
+                label = "Precio"
                 size = "small"
                 InputLabelProps = {{ shrink: true}}
                 className = {classes.dropdownMultiple}
                 defaultValue=''
-                // onChange={handleOnChange}
-                name="telephone"
-                error={errors.hasOwnProperty('telephone') && errors['telephone'].message} 
-                helperText = {errors.hasOwnProperty('telephone') && errors['telephone'].message}                             
+                name="price"
+                error={errors.hasOwnProperty('price') && errors['price'].message} 
+                helperText = {errors.hasOwnProperty('price') && errors['price'].message}                             
               />
               </FormControl>
-              </Grid>
-              <Grid item xs={12} md={6} lg={4} style={{display: 'flex'}}>
-                <FormControl fullWidth>
-                  <TextField
-                    fullWidth
-                    className={classes.dropdownMultiple}
-                    variant="outlined"
-                    defaultValue = ''
-                    size = 'small'
-                    InputLabelProps={{ shrink: true }}
-                    inputRef={register}
-                    label = 'Direccion'
-                    name = 'address'
-                    error={errors.hasOwnProperty('address') && errors['address'].message} 
-                    helperText = {errors.hasOwnProperty('address') && errors['address'].message}                             
-                    // value={informationUser.name}
-                  />
-                </FormControl>   
               </Grid>
                <Grid item xs={12} sm={12} lg={4}>
               <Button  type="submit"  className = { classes.create }>FINALIZAR</Button>&nbsp;&nbsp;
@@ -218,4 +197,4 @@ const CrearUsuario = () => {
     )
 }
 
-export default CrearUsuario;
+export default CrearProducto;
