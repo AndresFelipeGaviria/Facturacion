@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,6 +9,8 @@ import TableRow from '@material-ui/core/TableRow';
 import {Paper, Tooltip} from '@material-ui/core';
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditarUsuario from './editarUsuario';
+import axios from 'axios';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -28,17 +30,6 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 const useStyles = makeStyles({
   table: {
@@ -47,8 +38,16 @@ const useStyles = makeStyles({
 });
 
 export default function CustomizedTables({allUsers}) {
+
+  const [userId, setUserId] = useState();
   const classes = useStyles();
 
+  const deleteUser = (id) => {
+    axios.delete(`https://localhost:44320/api/Clients/${id}`)
+    .then((response) =>console.log(response.status))
+    .catch((error) =>console.log(error))
+  }
+  console.log(userId)
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
@@ -74,23 +73,25 @@ export default function CustomizedTables({allUsers}) {
               <div className={classes.columnEvent}>
               <Tooltip title="Editar" arrow placement="top">
                 <EditIcon
-                  onClick={() =>console.log('editando')}
+                  onClick={() =>setUserId(row.id)}
                   className={classes.iconEvent}
                 />
               </Tooltip>
             &nbsp;&nbsp;
               <Tooltip title="Anular" arrow placement="top">
                 <DeleteIcon
-                  onClick={() => console.log('eliminando')}
+                  onClick={() => deleteUser(row.id)}
                 //   onClick={() => onDelete(data.id)}
                   className={classes.iconEvent}
                 />
               </Tooltip>
           </div>
+          {userId === row.id && < EditarUsuario userId={row}/>}
               </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
+        
       </Table>
     </TableContainer>
   );

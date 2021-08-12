@@ -6,6 +6,7 @@ import { Grid, TextField, Card, Button, CardContent, FormControl, FormHelperText
 // import Snackbars from "../../componentes/snackbars/SnackBars";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios'
 import * as yup from "yup";
 
 const defaultValues = {
@@ -114,82 +115,14 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 // export const STATE = getState();
-const CrearUsuario = ({closeCreate, stateEdit}) => {
+const CrearUsuario = (refrestRequestUser, stateEdit) => {
 
     const classes = useStyles();
     const [openStatus, setOpenStatus] = useState(false);
-    const [openCancel, setOpenCancel] = useState(false);
-    const [data, setData]= useState(false);
-    const [disabledOnsubmit, setDisabledOnsubmit] = useState(false);
    
     const [informationUser, setInformationUser] = useState(defaultValues); 
 
-    const [message, setMessage] = useState({
-      description : '',
-      textButtonSubmit : '',
-      handleClick : () => {} ,
-      handleClickOut : () => {},
-      oneButtons : false,
-      type : '',
-      open : false
-  })
   
-    const [confirm, setConfirm] = useState({
-      open: false,
-      question: "",
-      handleClickOut: () => {},
-      handleClick: () => {},
-    });
-  
-    const closeMessage = () => {
-      setMessage((anterior) => ({
-        ...anterior,
-        open: false,
-      }));
-    };
-  
-    const closeModal = () => {
-      setDisabledOnsubmit(false);
-      setConfirm((anterior) => ({
-        ...anterior,
-        open: false,
-      }));
-    };
-
-    const handleClickOut = () => {setMessage({...message, open: false});  setDisabledOnsubmit(false); }
-    const handleClickClose = () => {
-      setMessage({...message, open: false}); 
-      setDisabledOnsubmit(false);
-      setValue('name');
-      setInformationUser(defaultValues)
-    }
-  
-    const cancelConfirm = () => {
-      const create = "¿Está seguro que NO desea continuar creando el registro?"
-          setMessage({
-            description : create,
-            textButtonSubmit : 'Aceptar',
-            handleClick : () => handleClickOut(),
-            handleClickOut: () => handleClickClose(),
-            type : 'WARNING',
-            open : true
-        })
-    };
-
-    const cancel = () => {
-      closeModal();
-      setMessage({
-        open: true,
-        text: "Registro cancelado",
-        type: "warning",
-        fontColor: "#BA8A08",
-        handleClose: closeMessage,
-      });
-      setTimeout(() => {
-        closeCreate();
-      }, 1000);
-    };
-
   const schema = yup.object().shape({
     name: yup.string().required('Campo requerido'),
     telephone: yup.string().required('Campo requerido'),
@@ -204,17 +137,18 @@ const CrearUsuario = ({closeCreate, stateEdit}) => {
   });
 
   const onSubmit = (info) => {
-    setDisabledOnsubmit(true)
+
+    const inforUser = {
+      name: info.name,
+      telephone: parseInt(info.telephone),
+      address: info.address,
+    }
+    console.log(info)
+    axios.post('https://localhost:44320/api/Clients/', inforUser)
+    .then((response) =>console.log(response.status))
+    .catch((error) =>console.log(error))
    
   }
-
-  const openModalStatus = () => setOpenStatus(true)
-
-  
-  const refresh = () =>  stateEdit(); 
-
-  
-  const buttonDisabled = informationUser.name.length > 0 && !errors.name ;
 
 
     return (
@@ -247,6 +181,7 @@ const CrearUsuario = ({closeCreate, stateEdit}) => {
                 fullWidth
                 inputRef={register}
                 variant="outlined"
+                type="number"
                 placeholder = 'Telefono'
                 label = "Telefono"
                 size = "small"
