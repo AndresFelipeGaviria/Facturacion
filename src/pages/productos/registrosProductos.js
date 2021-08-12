@@ -43,7 +43,7 @@ export default function CustomizedTables({allProductos}) {
   const classes = useStyles();
 
   const deleteProduct = (id) => {
-    axios.delete(`https://localhost:44320/api/Products/${id}`)
+    axios.delete(`https://localhost:44361/api/Products/${id}`)
     .then((response) =>console.log(response.status))
     .catch((error) =>console.log(error))
   }

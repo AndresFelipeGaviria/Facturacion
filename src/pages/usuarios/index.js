@@ -8,9 +8,9 @@ const Usuarios = () => {
 
     const [allUsers, setAllUsers] = useState([])
     const [refresTabled, setResfresTabled] = useState(false);
-    
+
     useEffect(() =>{
-        axios.get('https://localhost:44320/api/Clients')
+        axios.get('https://localhost:44361/api/Clients')
         .then((response) =>setAllUsers(response?.data))
         .catch((error) =>console.log(error))
     },[refresTabled])

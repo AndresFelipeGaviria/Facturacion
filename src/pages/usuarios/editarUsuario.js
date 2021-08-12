@@ -101,7 +101,7 @@ console.log(openModal)
 
   useEffect(() => {
       if(userId){
-        axios.get(`https://localhost:44320/api/Clients/${userId.id}`)
+        axios.get(`https://localhost:44361/api/Clients/${userId.id}`)
         .then((response) =>{setValue('name', response.data.name)
         setValue('telephone', response.data.telephone)
         setValue('address', response.data.address)})
@@ -120,7 +120,7 @@ console.log(openModal)
         address: data.address,
       }
 
-    axios.put(`https://localhost:44320/api/Clients/${userId.id}`, inforUser)
+    axios.put(`https://localhost:44361/api/Clients/${userId.id}`, inforUser)
     .then(() =>{setValue('name','')
     setValue('telephone', '')
     setValue('address', '')})

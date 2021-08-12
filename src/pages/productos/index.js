@@ -10,7 +10,7 @@ const Productos = () => {
     const [refresTabled, setResfresTabled] = useState(false);
     
     useEffect(() =>{
-        axios.get('https://localhost:44320/api/Products')
+        axios.get('https://localhost:44361/api/Products')
         .then((response) =>setAllProductos(response?.data))
         .catch((error) =>console.log(error))
     },[refresTabled])

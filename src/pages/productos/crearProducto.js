@@ -135,7 +135,7 @@ const CrearProducto = () => {
       price: parseInt(info.price),
     }
     
-    axios.post('https://localhost:44320/api/Products/', inforUser)
+    axios.post('https://localhost:44361/api/Products/', inforUser)
     .then((response) =>console.log(response.status))
     .catch((error) =>console.log(error))
    

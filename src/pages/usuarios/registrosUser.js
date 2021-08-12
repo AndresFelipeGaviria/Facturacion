@@ -43,7 +43,7 @@ export default function CustomizedTables({allUsers}) {
   const classes = useStyles();
 
   const deleteUser = (id) => {
-    axios.delete(`https://localhost:44320/api/Clients/${id}`)
+    axios.delete(`https://localhost:44361/api/Clients/${id}`)
     .then((response) =>console.log(response.status))
     .catch((error) =>console.log(error))
   }
