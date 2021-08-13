@@ -75,9 +75,45 @@ namespace facturacionBack.Controllers
         }
 
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<ResponseInvoice>> GetById(int id)
         {
-            return "value";
+            //
+            var invoice = await _facturaContexto.Invoices.Where(x => x.Id == id).Include("DetailsNavigations").Include("DetailsNavigations.Product").Include("DetailsNavigations").Include("ClientNavigation").FirstOrDefaultAsync();
+
+            if (invoice == null)
+            {
+                return BadRequest();
+            }
+
+                var itemInvoce = new ResponseInvoice();
+                itemInvoce.InvoiceId = invoice.Id;
+                itemInvoce.NameShopkeeper = invoice.NameShopkeeper;
+                itemInvoce.IdClient = invoice.ClientNavigation.Id;
+                itemInvoce.NameClient = invoice.ClientNavigation.Name;
+                itemInvoce.Date = invoice.Date;
+
+                itemInvoce.DetailInvoice = new List<DetailInvoiceDto>();
+                foreach (var detInvoice in invoice.DetailsNavigations)
+                {
+                    var itemDt = new DetailInvoiceDto();
+
+                    itemDt.Product = new ProductDto
+                    {
+                        Id = detInvoice.Product.Id,
+                        Name = detInvoice.Product.Name,
+                        Price = detInvoice.Product.Price
+};
+
+                        itemDt.Precio_Pro = detInvoice.Precio_Pro;
+                        itemDt.Id = detInvoice.Id;
+                        itemDt.ProductId = detInvoice.ProductId;
+                        itemInvoce.DetailInvoice.Add(itemDt);
+
+                }
+           
+                    return itemInvoce;
+
+
         }
 
         [HttpPost]
