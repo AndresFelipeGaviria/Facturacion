@@ -90,7 +90,7 @@ const ModalEditProducts = ({
 
   useEffect(() => {
       if(productId){
-        axios.get(`http://www.facturacionafg.somee.com/api/Products/${productId.id}`)
+        axios.get(`https://facturacionback20210813172116.azurewebsites.net/api/Products/${productId.id}`)
         .then((response) =>{setValue('name', response.data.name)
         setValue('price', response.data.price)})
         .catch((error) =>console.log(error))
@@ -106,7 +106,7 @@ const ModalEditProducts = ({
         price: parseInt(data.price),
       }
 
-    axios.put(`http://www.facturacionafg.somee.com/api/Products/${productId.id}`, infoProduct)
+    axios.put(`https://facturacionback20210813172116.azurewebsites.net/api/Products/${productId.id}`, infoProduct)
     .then(() =>{
       setValue('name','')
       setValue('price', '')

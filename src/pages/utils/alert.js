@@ -36,7 +36,7 @@ export default function Alerta(props) {
   return (
     <div className={classes.root}>
       <Snackbar open={props.open} autoHideDuration={3000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error">
+        <Alert onClose={handleClose} severity={props.type}>
           {props.text}
         </Alert>
       </Snackbar>

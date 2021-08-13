@@ -4,25 +4,12 @@ import { Grid, TextField, Card, Button, CardContent, InputLabel, MenuItem, Selec
 import { yupResolver } from "@hookform/resolvers/yup";
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-import deLocale from "date-fns/locale/es";
-// import { styles } from '../styles';
 import * as yup from "yup";
 import Alerta from '../utils/alert';
 import AgregarProducto from './agregarProducto';
 import DetalleFactura from './detalleFactura';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-  DatePicker
-} from '@material-ui/pickers';
 
-const defaultValues = {
- code: null,
- status: null,
- name: ''
-};
+
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -133,14 +120,14 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const Factura = (props) => {
-console.log(props)
+
     const classes = useStyles();
+    const [successInvoice, setSuccessInvoice] = useState(false)
     const [isAlert, setIsAlert] = useState(false)
     const [allClients, setAllClients] = useState([]);
     const [allProducts, setAllProducts] = useState([]);
     const [purchProducts, setPurchProducts] = useState([]);
-    const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
-   
+ 
   
   const schema = yup.object().shape({
     date: yup.string().required('Campo requerido'),
@@ -151,7 +138,6 @@ console.log(props)
 
   const { register, handleSubmit, control,  errors, setValue } = useForm({
     resolver: yupResolver(schema),
-    defaultValues,
     mode: "onTouched",
     reValidateMode: "onChange",
   });
@@ -175,8 +161,18 @@ if(purchProducts.length > 0) {
       detailInvoiceDto: productos
     }
 
-    axios.post('http://www.facturacionafg.somee.com/api/Invoice/', invoice)
-    .then((response) =>console.log('dta'))
+    axios.post('https://facturacionback20210813172116.azurewebsites.net/api/Invoice/', invoice)
+    .then((response) =>{
+      setValue('date', '')
+      setValue('nameShopkeeper', '')
+      setValue('clientId', 0)
+      setAllProducts([])
+      setPurchProducts([])
+      setSuccessInvoice(true)
+      setTimeout(() => {
+      setSuccessInvoice(false)
+      }, 2000);
+    })
     .catch((error) =>console.log(error))
 } else {
   setIsAlert(true)
@@ -189,14 +185,14 @@ if(purchProducts.length > 0) {
 
   useEffect(() => {
     const getAllUser = () => {
-      axios.get('http://www.facturacionafg.somee.com/api/Clients')
+      axios.get('https://facturacionback20210813172116.azurewebsites.net/api/Clients')
         .then((response) =>setAllClients(response?.data))
         .catch((error) =>console.log(error))
     }
     getAllUser();
 
     const getAllProducts = () => {
-      axios.get('http://www.facturacionafg.somee.com/api/Products')
+      axios.get('https://facturacionback20210813172116.azurewebsites.net/api/Products')
       .then((response) =>setAllProducts(response?.data))
       .catch((error) =>console.log(error))
     }
@@ -215,7 +211,7 @@ if(purchProducts.length > 0) {
 
    return (
         <>
-         <Card elevation = {0} style={{background: 'withe', width: '60%', margin:'auto'}}>
+         <Card elevation = {0} style={{background: 'withe', width: '65%', margin:'auto'}}>
         <CardContent>
           <form id="formularioCompleto" onSubmit={handleSubmit(onSubmit)} >
             <Typography style={{textAlign: 'center'}}>
@@ -309,7 +305,8 @@ if(purchProducts.length > 0) {
                <Grid item xs={12} sm={12} lg={4}>
             </Grid>
           </form>
-            {isAlert && <Alerta open={isAlert} text={'Ingresa algún producto'}/>}
+            {isAlert  && <Alerta open={isAlert} type={'error'} text={'Ingresa algún producto'}/>}
+            { successInvoice && <Alerta open={successInvoice} type={'success'} text={'Factura creada exitosamente'}/>}
           <AgregarProducto allProducts={allProducts} countProducts={countProducts} purchProducts={purchProducts}/>
           < DetalleFactura purchProducts={purchProducts} countProducts={deleteNewProduct}/>
           <Button type="submit" form="formularioCompleto"  className = { classes.create }>Crear Factura</Button>&nbsp;&nbsp; 

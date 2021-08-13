@@ -48,7 +48,7 @@ export default function TablaFacturas(props) {
 
   useEffect(() => {
     const getAllInvoices = () => {
-      axios.get(`http://www.facturacionafg.somee.com/api/Invoice`)
+      axios.get(`https://facturacionback20210813172116.azurewebsites.net/api/Invoice`)
       .then((response) =>setAllInvoice(response.data))
       .catch((error) =>console.log(error))
     }

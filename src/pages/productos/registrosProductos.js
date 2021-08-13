@@ -43,7 +43,7 @@ export default function CustomizedTables({allProductos, refrestRequestProduct}) 
   const classes = useStyles();
 
   const deleteProduct = (id) => {
-    axios.delete(`http://www.facturacionafg.somee.com/api/Products/${id}`)
+    axios.delete(`https://facturacionback20210813172116.azurewebsites.net/api/Products/${id}`)
     .then((response) =>refrestRequestProduct())
     .catch((error) =>console.log(error))
   }

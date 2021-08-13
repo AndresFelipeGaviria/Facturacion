@@ -135,7 +135,7 @@ const CrearProducto = ({refrestRequestProduct}) => {
       price: parseInt(info.price),
     }
     
-    axios.post('http://www.facturacionafg.somee.com/api/Products/', inforUser)
+    axios.post('https://facturacionback20210813172116.azurewebsites.net/api/Products/', inforUser)
     .then((response) =>{console.log(response.status); refrestRequestProduct()})
     .catch((error) =>console.log(error))
    

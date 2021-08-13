@@ -130,7 +130,7 @@ const VerFactura = (props) => {
 
   useEffect(() => {
     const getInvoice = () => {
-      axios.get(`http://www.facturacionafg.somee.com/api/Invoice/${facturaId}`)
+      axios.get(`https://facturacionback20210813172116.azurewebsites.net/api/Invoice/${facturaId}`)
         .then((response) =>setFactura(response?.data))
         .catch((error) =>console.log(error))
     }
@@ -141,7 +141,7 @@ const VerFactura = (props) => {
 
    return (
         <>
-         <Card elevation = {0} style={{background: 'withe', width: '60%', margin:'auto'}}>
+         <Card elevation = {0} style={{background: 'withe', width: '65%', margin:'auto'}}>
         <CardContent>
           <form id="formularioCompleto"  >
             <Typography style={{textAlign: 'center'}}>

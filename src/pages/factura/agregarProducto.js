@@ -24,7 +24,7 @@ const AgregarProducto = ({allProducts, countProducts, purchProducts}) => {
       });
 
       const onSubmit = (data) => {
-        axios.get(`http://www.facturacionafg.somee.com/api/Products/${data.product}`)
+        axios.get(`https://facturacionback20210813172116.azurewebsites.net/api/Products/${data.product}`)
         .then((response) =>{
             const filterProduct = purchProducts.find((x)=> x.producto.id === response.data.id)
         
@@ -114,7 +114,7 @@ const AgregarProducto = ({allProducts, countProducts, purchProducts}) => {
          </Grid>
         </Grid>
       </form>
-      {isAlert && <Alerta open={isAlert} text={'Producto ya Ingresado'}/>}
+      {isAlert && <Alerta open={isAlert}  type={'error'} text={'Producto ya Ingresado'}/>}
       </CardContent>
       </Card>
     )

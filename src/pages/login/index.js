@@ -1,6 +1,6 @@
 
   
-import React from 'react';
+import React,{useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -18,6 +18,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormControl } from '@material-ui/core';
+import Alerta from '../utils/alert';
+import axios from 'axios';
 
 function Copyright() {
   return (
@@ -67,9 +69,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide(props) {
   const classes = useStyles();
+  const [isAlert, setIsAlert] = useState(false)
 
   const schema = yup.object().shape({
-    email: yup.string().nullable().required('Campo requerido'),
+    username: yup.string().nullable().required('Campo requerido'),
     password: yup.string().nullable().required('Campo requerido')
   })
   
@@ -78,10 +81,21 @@ export default function SignInSide(props) {
     mode: "onTouched",
     reValidateMode: "onChange"
   })
-
+  
   const onSubmit = (data) => {
     console.log(data)
-    props.history.push('/dashboard/factura')
+    axios.post(`https://facturacionback20210813172116.azurewebsites.net/api/Auth`,data)
+    .then((response) =>{
+      if(response.status >= 200 && response.status <= 201){
+        props.history.push('/dashboard/factura')
+      } 
+    })
+    .catch((error) =>{
+      setIsAlert(true)
+      setTimeout(() => {
+      setIsAlert(false)
+      }, 2000);
+    })
   }
 
 
@@ -96,6 +110,8 @@ export default function SignInSide(props) {
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
+            {isAlert && <Alerta open={true} type={'error'} text={'Usuario no encontrado'}/>}
+
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
             <Grid item xs={12} md={12} lg={12}>
@@ -105,13 +121,13 @@ export default function SignInSide(props) {
               margin="normal"
               inputRef = {register}
               fullWidth
-              // id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              // id="username"
+              label="Nombre"
+              name="username"
+              autoComplete="username"
               autoFocus
-              error={!!errors.hasOwnProperty("email") && errors["email"].message}
-              helperText={errors.hasOwnProperty("email") && errors["email"].message}
+              error={!!errors.hasOwnProperty("username") && errors["username"].message}
+              helperText={errors.hasOwnProperty("username") && errors["username"].message}
             />
             </FormControl>
             </Grid>
@@ -123,7 +139,7 @@ export default function SignInSide(props) {
               inputRef = {register}
               fullWidth
               name="password"
-              label="Password"
+              label="Contraseña"
               type="password"
               // id="password"
               // autoComplete="current-password"

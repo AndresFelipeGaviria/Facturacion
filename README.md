@@ -9,7 +9,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 -cuando se crea una factura no estoy mostrando, mensaje de trabajo terminado exitosamente debido a que queria que se realizara el flujo completo primeramente.\
 -aun no se visualiza ppr completo la factura despues de creada.\
 -la carpeta FacturacionBack es la parte que se realizo para codificar base de datos.\
--la base de datos se encuentra alojada en un servidor, es decir que puedes ingresar a esta url y consumir directamente para ver el manejo http://www.facturacionafg.somee.com/swagger/index.html
+-la base de datos se encuentra alojada en un servidor, es decir que puedes ingresar a esta url y consumir directamente para ver el manejo https://facturacionback20210813172116.azurewebsites.net/swagger/index.html
 
 ### puntos a mejorar 
 

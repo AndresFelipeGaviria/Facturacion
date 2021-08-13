@@ -10,7 +10,7 @@ const Productos = () => {
     const [refresTabled, setResfresTabled] = useState(false);
     
     useEffect(() =>{
-        axios.get('http://www.facturacionafg.somee.com/api/Products')
+        axios.get('https://facturacionback20210813172116.azurewebsites.net/api/Products')
         .then((response) =>setAllProductos(response?.data))
         .catch((error) =>console.log(error))
     },[refresTabled])
