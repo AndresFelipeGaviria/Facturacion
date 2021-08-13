@@ -132,8 +132,8 @@ const useStyles = makeStyles((theme) => ({
     
   }));
 
-const Factura = () => {
-
+const Factura = (props) => {
+console.log(props)
     const classes = useStyles();
     const [isAlert, setIsAlert] = useState(false)
     const [allClients, setAllClients] = useState([]);
@@ -176,7 +176,7 @@ if(purchProducts.length > 0) {
     }
 
     axios.post('http://www.facturacionafg.somee.com/api/Invoice/', invoice)
-    .then((response) =>console.log(response.status))
+    .then((response) =>console.log('dta'))
     .catch((error) =>console.log(error))
 } else {
   setIsAlert(true)
