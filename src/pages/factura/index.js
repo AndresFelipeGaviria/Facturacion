@@ -175,7 +175,7 @@ if(purchProducts.length > 0) {
       detailInvoiceDto: productos
     }
 
-    axios.post('https://localhost:44361/api/Invoice/', invoice)
+    axios.post('http://www.facturacionafg.somee.com/api/Invoice/', invoice)
     .then((response) =>console.log(response.status))
     .catch((error) =>console.log(error))
 } else {
@@ -189,14 +189,14 @@ if(purchProducts.length > 0) {
 
   useEffect(() => {
     const getAllUser = () => {
-      axios.get('https://localhost:44361/api/Clients')
+      axios.get('http://www.facturacionafg.somee.com/api/Clients')
         .then((response) =>setAllClients(response?.data))
         .catch((error) =>console.log(error))
     }
     getAllUser();
 
     const getAllProducts = () => {
-      axios.get('https://localhost:44361/api/Products')
+      axios.get('http://www.facturacionafg.somee.com/api/Products')
       .then((response) =>setAllProducts(response?.data))
       .catch((error) =>console.log(error))
     }

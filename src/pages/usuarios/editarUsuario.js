@@ -91,7 +91,7 @@ const ModalEditClient = ({
 
   useEffect(() => {
       if(userId){
-        axios.get(`https://localhost:44361/api/Clients/${userId.id}`)
+        axios.get(`http://www.facturacionafg.somee.com/api/Clients/${userId.id}`)
         .then((response) =>{setValue('name', response.data.name)
         setValue('telephone', response.data.telephone)
         setValue('address', response.data.address)})
@@ -109,7 +109,7 @@ const ModalEditClient = ({
         address: data.address,
       }
 
-    axios.put(`https://localhost:44361/api/Clients/${userId.id}`, inforUser)
+    axios.put(`http://www.facturacionafg.somee.com/api/Clients/${userId.id}`, inforUser)
     .then(() =>{
       setValue('name','')
       setValue('telephone', '')

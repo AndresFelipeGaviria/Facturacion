@@ -137,7 +137,7 @@ const CrearUsuario = ({refrestRequest}) => {
       address: info.address,
     }
     console.log(info)
-    axios.post('https://localhost:44361/api/Clients/', inforUser)
+    axios.post('http://www.facturacionafg.somee.com/api/Clients/', inforUser)
     .then((response) =>{
       setValue('name','');
       setValue('telephone','');

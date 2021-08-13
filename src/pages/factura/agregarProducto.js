@@ -24,7 +24,7 @@ const AgregarProducto = ({allProducts, countProducts, purchProducts}) => {
       });
 
       const onSubmit = (data) => {
-        axios.get(`https://localhost:44361/api/Products/${data.product}`)
+        axios.get(`http://www.facturacionafg.somee.com/api/Products/${data.product}`)
         .then((response) =>{
             const filterProduct = purchProducts.find((x)=> x.producto.id === response.data.id)
         

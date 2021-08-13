@@ -10,7 +10,7 @@ const Usuarios = () => {
     const [refresTabled, setResfresTabled] = useState(false);
 
     useEffect(() =>{
-        axios.get('https://localhost:44361/api/Clients')
+        axios.get('http://www.facturacionafg.somee.com/api/Clients')
         .then((response) =>setAllUsers(response?.data))
         .catch((error) =>console.log(error))
     },[refresTabled])

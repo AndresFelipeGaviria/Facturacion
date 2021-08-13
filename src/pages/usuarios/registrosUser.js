@@ -43,7 +43,7 @@ export default function CustomizedTables({allUsers, refrestRequestUser}) {
   const classes = useStyles();
 
   const deleteUser = (id) => {
-    axios.delete(`https://localhost:44361/api/Clients/${id}`)
+    axios.delete(`http://www.facturacionafg.somee.com/api/Clients/${id}`)
     .then((response) =>refrestRequestUser())
     .catch((error) =>console.log(error))
   }

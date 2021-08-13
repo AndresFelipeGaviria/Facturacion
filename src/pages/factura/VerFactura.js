@@ -130,7 +130,7 @@ const VerFactura = (props) => {
 
   useEffect(() => {
     const getInvoice = () => {
-      axios.get(`https://localhost:44361/api/Invoice/${facturaId}`)
+      axios.get(`http://www.facturacionafg.somee.com/api/Invoice/${facturaId}`)
         .then((response) =>setFactura(response?.data))
         .catch((error) =>console.log(error))
     }
