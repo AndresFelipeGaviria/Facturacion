@@ -67,7 +67,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide(props) {
   const classes = useStyles();
-console.log(props)
 
   const schema = yup.object().shape({
     email: yup.string().nullable().required('Campo requerido'),
@@ -82,7 +81,7 @@ console.log(props)
 
   const onSubmit = (data) => {
     console.log(data)
-    props.history.push('/dashboard')
+    props.history.push('/dashboard/factura')
   }
 
 
@@ -159,7 +158,6 @@ console.log(props)
               </Grid>
             </Grid>
             <Box mt={5}>
-              <Copyright />
             </Box>
           </form>
         </div>

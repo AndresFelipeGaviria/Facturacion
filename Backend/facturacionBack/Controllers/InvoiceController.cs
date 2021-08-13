@@ -101,9 +101,10 @@ namespace facturacionBack.Controllers
                     {
                         Id = detInvoice.Product.Id,
                         Name = detInvoice.Product.Name,
-                        Price = detInvoice.Product.Price
+                        Price = detInvoice.Product.Price,
+                        
 };
-
+                        itemDt.Cantidad = detInvoice.Cantidad;
                         itemDt.Precio_Pro = detInvoice.Precio_Pro;
                         itemDt.Id = detInvoice.Id;
                         itemDt.ProductId = detInvoice.ProductId;
