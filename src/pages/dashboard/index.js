@@ -20,7 +20,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import Users from '../usuarios'
-import Products from '../productos'
+import Products from '../productos';
+import Factura from '../factura';
+import Facturas from '../factura/TablaFacturas';
 import Logo from '../../img/Logo.jpg';
 import { useHistory, Route,Switch, useRouteMatch } from "react-router-dom";
 
@@ -132,8 +134,7 @@ const  DashboardApp=(props) =>{
     setOpen(true);
   };
   const handleDrawerClose = () => setOpen(false);
-
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+ 
   const { path } = useRouteMatch();
 
   return (
@@ -179,13 +180,25 @@ const  DashboardApp=(props) =>{
         <Divider />
         <ListItem button key={1}>
             <ListItemIcon> <InboxIcon /> </ListItemIcon>
-            <ListItemText primary='Usuarios' 
+            <ListItemText primary='Clientes' 
             onClick={() => history.push('/dashboard/users')}/>
           </ListItem>
           <ListItem button key={2}>
             <ListItemIcon> <InboxIcon /> </ListItemIcon>
             <ListItemText primary='Productos' 
             onClick={() => history.push('/dashboard/products')}
+            />
+          </ListItem>
+          <ListItem button key={3}>
+            <ListItemIcon> <InboxIcon /> </ListItemIcon>
+            <ListItemText primary='Crear Factura' 
+            onClick={() => history.push('/dashboard/factura')}
+            />
+          </ListItem>
+          <ListItem button key={4}>
+            <ListItemIcon> <InboxIcon /> </ListItemIcon>
+            <ListItemText primary='Lista Facturas' 
+            onClick={() => history.push('/dashboard/facturas')}
             />
           </ListItem>
         <Divider />
@@ -207,9 +220,19 @@ const  DashboardApp=(props) =>{
             path={`${path}/products`}
             component={Products}
         />
+          <Route
+            exact
+            path={`${path}/factura`}
+            component={Factura}
+        />
+          <Route
+            exact
+            path={`${path}/facturas`}
+            component={Facturas}
+        />
 
       </Switch>
-            <Copyright />
+            {/* <Copyright /> */}
           </Box>
         </Container>
       </main>
