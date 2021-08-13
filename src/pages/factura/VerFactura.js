@@ -156,8 +156,8 @@ const VerFactura = (props) => {
             <Grid container spacing={3} alignItems="center" direction="row"style = {{background: 'white', borderRadius: 15, display: 'flex', justifyContent: 'space-evenly'}}>
 
                 <Grid container spacing={2} direction="row" justify="center" style={{marginTop: 15, marginLeft:10, marginBottom:10}}>
-              <Grid item xs={12} md={6} lg={3} style={{display: 'flex'}}><strong>FECHA : </strong> {moment(factura.date).format('L')}</Grid> 
-              <Grid item xs={12} md={6} lg={3} style={{display: 'flex'}}><strong>ATENDIO : </strong>{factura.nameShopkeeper}</Grid>
+              <Grid item xs={12} md={6} lg={4} style={{display: 'flex'}}><strong>FECHA : </strong> {moment(factura.date).format('L')}</Grid> 
+              <Grid item xs={12} md={6} lg={4} style={{display: 'flex'}}><strong>ATENDIO : </strong>{factura.nameShopkeeper}</Grid>
               <Grid  item xs={12} md={6} lg={4}><strong>CLIENTE : </strong>{factura.nameClient}</Grid>
               </Grid>
               </Grid>
@@ -166,7 +166,7 @@ const VerFactura = (props) => {
             </Grid>
           </form>
             {isAlert && <Alerta open={isAlert} text={'Ingresa algún producto'}/>}
-          < DetalleFactura purchProducts={[factura]} />
+          < DetalleFactura purchProducts={factura} />
          </CardContent>
         </Card>
         </>

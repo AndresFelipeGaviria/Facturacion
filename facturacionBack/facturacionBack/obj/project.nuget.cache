@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2CREATRmlUes56JuFbzvo1B9EBJbTVNs81Nl4S2/Lx3Evs+cZ9Qw5N6/bDV+GsF2YKjPouOCpbcX1/QhxW4L1Q==",
+  "dgSpecHash": "IEeI3vMFbJ9tmG0xKR+c5aFsQV3hZDKhdlVoSrZGZ0ZT53k47vf2i57w1yABWt+rPDbXD0GSlKim064HvcJm5Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\THINKPAD\\source\\repos\\facturacionBack\\facturacionBack\\facturacionBack.csproj",
+  "projectFilePath": "C:\\Users\\THINKPAD\\source\\repos\\facturacion\\facturacionBack\\facturacionBack\\facturacionBack.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\THINKPAD\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\THINKPAD\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

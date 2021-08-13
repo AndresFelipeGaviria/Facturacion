@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\THINKPAD\\source\\repos\\facturacionBack\\facturacionBack\\facturacionBack.csproj": {}
+    "C:\\Users\\THINKPAD\\source\\repos\\facturacion\\facturacionBack\\facturacionBack\\facturacionBack.csproj": {}
   },
   "projects": {
-    "C:\\Users\\THINKPAD\\source\\repos\\facturacionBack\\facturacionBack\\facturacionBack.csproj": {
+    "C:\\Users\\THINKPAD\\source\\repos\\facturacion\\facturacionBack\\facturacionBack\\facturacionBack.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\THINKPAD\\source\\repos\\facturacionBack\\facturacionBack\\facturacionBack.csproj",
+        "projectUniqueName": "C:\\Users\\THINKPAD\\source\\repos\\facturacion\\facturacionBack\\facturacionBack\\facturacionBack.csproj",
         "projectName": "facturacionBack",
-        "projectPath": "C:\\Users\\THINKPAD\\source\\repos\\facturacionBack\\facturacionBack\\facturacionBack.csproj",
+        "projectPath": "C:\\Users\\THINKPAD\\source\\repos\\facturacion\\facturacionBack\\facturacionBack\\facturacionBack.csproj",
         "packagesPath": "C:\\Users\\THINKPAD\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\THINKPAD\\source\\repos\\facturacionBack\\facturacionBack\\obj\\",
+        "outputPath": "C:\\Users\\THINKPAD\\source\\repos\\facturacion\\facturacionBack\\facturacionBack\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\THINKPAD\\AppData\\Roaming\\NuGet\\NuGet.Config",

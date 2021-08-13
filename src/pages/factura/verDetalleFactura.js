@@ -20,6 +20,7 @@ const useStyles = makeStyles({
 export default function DetalleFactura({purchProducts}) {
   const classes = useStyles();
 
+  console.log(purchProducts?.detailInvoice)
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} size="small" aria-label="a dense table">
@@ -32,14 +33,16 @@ export default function DetalleFactura({purchProducts}) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {purchProducts?.map((row) => (
-            <TableRow key={row?.invoiceId}>
-              <TableCell component="th" scope="row">
-                {row?.detailInvoice?.cantidad}
-              </TableCell>
-              <TableCell align="left">{row?.detailInvoice?.product?.name}</TableCell>
-              <TableCell align="left">{row?.detailInvoice?.product?.price}</TableCell>
-              <TableCell align="left">{row?.detailInvoice?.product?.price * row?.detailInvoice?.cantidad}</TableCell>
+          {purchProducts?.detailInvoice?.map((prod) => (
+            <TableRow>
+             
+                     <TableCell component="th" scope="row">
+                     {prod?.cantidad}
+                   </TableCell>
+                   <TableCell align="left">{prod?.product?.name}</TableCell>
+                   <TableCell align="left">{prod?.product?.price}</TableCell>
+                   <TableCell align="left">{prod?.product?.price * prod?.cantidad}</TableCell>
+                
             </TableRow>
           ))}
         </TableBody>
