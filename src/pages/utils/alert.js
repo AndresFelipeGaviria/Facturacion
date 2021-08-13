@@ -37,7 +37,7 @@ export default function Alerta(props) {
     <div className={classes.root}>
       <Snackbar open={props.open} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error">
-          Producto ya Ingresado
+          {props.text}
         </Alert>
       </Snackbar>
     </div>

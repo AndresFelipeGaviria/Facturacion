@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import DeleteIcon from '@material-ui/icons/Delete';
-import {Paper, Tooltip} from '@material-ui/core';
+import {Paper, Tooltip, Typography} from '@material-ui/core';
 
 const useStyles = makeStyles({
   table: {
@@ -28,7 +28,8 @@ const deleteProduct = (id) => {
     countProducts(filterProduct)
 }
 
-
+// const totaFactura = purchProducts.forEach((x)=>  x.cuantity )
+// console.log(purchProducts)
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} size="small" aria-label="a dense table">
@@ -62,6 +63,7 @@ const deleteProduct = (id) => {
           ))}
         </TableBody>
       </Table>
+      <Typography style={{textAlign: 'end', marginRight: 25}}>Total:  </Typography>
     </TableContainer>
   );
 }

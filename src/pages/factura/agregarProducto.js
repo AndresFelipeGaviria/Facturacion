@@ -114,7 +114,7 @@ const AgregarProducto = ({allProducts, countProducts, purchProducts}) => {
          </Grid>
         </Grid>
       </form>
-      {isAlert && <Alerta open={isAlert} />}
+      {isAlert && <Alerta open={isAlert} text={'Producto ya Ingresado'}/>}
       </CardContent>
       </Card>
     )
