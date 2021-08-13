@@ -23,21 +23,10 @@ import Users from '../usuarios'
 import Products from '../productos';
 import Factura from '../factura';
 import Facturas from '../factura/TablaFacturas';
+import VerFactura from '../factura/VerFactura';
 import Logo from '../../img/Logo.jpg';
 import { useHistory, Route,Switch, useRouteMatch } from "react-router-dom";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const drawerWidth = 240;
 
@@ -230,9 +219,13 @@ const  DashboardApp=(props) =>{
             path={`${path}/facturas`}
             component={Facturas}
         />
+         <Route
+            exact
+            path={`${path}/factura/:id`}
+            component={VerFactura}
+        />
 
       </Switch>
-            {/* <Copyright /> */}
           </Box>
         </Container>
       </main>

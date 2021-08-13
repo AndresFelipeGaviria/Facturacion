@@ -69,7 +69,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ModalEditProducts = ({
-  productId
+  productId,
+  refrestRequestProduct
 }) => {
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
@@ -106,8 +107,12 @@ const ModalEditProducts = ({
       }
 
     axios.put(`https://localhost:44361/api/Products/${productId.id}`, infoProduct)
-    .then(() =>{setValue('name','')
-    setValue('price', '')})
+    .then(() =>{
+      setValue('name','')
+      setValue('price', '')
+      refrestRequestProduct();
+      closeModal();
+    })
     .catch((error) =>console.log(error))
   }
 

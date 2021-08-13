@@ -38,7 +38,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TablaFacturas({allProductos}) {
+export default function TablaFacturas(props) {
 
   const [productId, setProductId] = useState();
   const [allInvoice, setAllInvoice] = useState([])
@@ -80,7 +80,7 @@ export default function TablaFacturas({allProductos}) {
               <div className={classes.columnEvent}>
               <Tooltip title="Ver" arrow placement="top">
                 <VisibilityIcon
-                  onClick={() =>setProductId(row.id)}
+                  onClick={() => props.history.push(`factura/${row.invoiceId}`)}
                   className={classes.iconEvent}
                 />
               </Tooltip>

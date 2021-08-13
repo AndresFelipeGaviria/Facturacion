@@ -68,21 +68,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ModalConfirmBase = ({
-  description,
-  open,
-  handleClick,
-  handleClickOut,
-  type,
-  title,
-  oneButtons,
-  textButtonSubmit,
-  userId
+const ModalEditClient = ({
+  userId,
+  refrestRequestUser
 }) => {
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
   const [openModal, setOpenModal] = React.useState(false)
-console.log(openModal)
 
   const schema = yup.object().shape({
     name: yup.string().required('Compo Requerido'),
@@ -97,8 +89,6 @@ console.log(openModal)
   });
 
 
-  console.log(userId)
-
   useEffect(() => {
       if(userId){
         axios.get(`https://localhost:44361/api/Clients/${userId.id}`)
@@ -112,7 +102,6 @@ console.log(openModal)
   }, [])
 
   const onSubmit = (data) => {
-    console.log(data)
 
     const inforUser = {
         name: data.name,
@@ -121,9 +110,13 @@ console.log(openModal)
       }
 
     axios.put(`https://localhost:44361/api/Clients/${userId.id}`, inforUser)
-    .then(() =>{setValue('name','')
-    setValue('telephone', '')
-    setValue('address', '')})
+    .then(() =>{
+      setValue('name','')
+      setValue('telephone', '')
+      setValue('address', '')
+      refrestRequestUser();
+      closeModal(false);
+    })
     .catch((error) =>console.log(error))
   }
 
@@ -170,7 +163,6 @@ console.log(openModal)
                 InputLabelProps = {{ shrink: true}}
                 className = {classes.dropdownMultiple}
                 defaultValue=''
-                // onChange={handleOnChange}
                 name="telephone"
                 error={errors.hasOwnProperty('telephone') && errors['telephone'].message} 
                 helperText = {errors.hasOwnProperty('telephone') && errors['telephone'].message}                             
@@ -191,7 +183,6 @@ console.log(openModal)
                     name = 'address'
                     error={errors.hasOwnProperty('address') && errors['address'].message} 
                     helperText = {errors.hasOwnProperty('address') && errors['address'].message}                             
-                    // value={informationUser.name}
                   />
                 </FormControl>   
               </Grid>
@@ -221,4 +212,4 @@ console.log(openModal)
   );
 };
 
-export default ModalConfirmBase;
+export default ModalEditClient;

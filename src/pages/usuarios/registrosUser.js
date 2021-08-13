@@ -37,14 +37,14 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CustomizedTables({allUsers}) {
+export default function CustomizedTables({allUsers, refrestRequestUser}) {
 
   const [userId, setUserId] = useState();
   const classes = useStyles();
 
   const deleteUser = (id) => {
     axios.delete(`https://localhost:44361/api/Clients/${id}`)
-    .then((response) =>console.log(response.status))
+    .then((response) =>refrestRequestUser())
     .catch((error) =>console.log(error))
   }
   console.log(userId)
@@ -86,7 +86,7 @@ export default function CustomizedTables({allUsers}) {
                 />
               </Tooltip>
           </div>
-          {userId === row.id && < EditarUsuario userId={row}/>}
+          {userId === row.id && < EditarUsuario userId={row} refrestRequestUser={refrestRequestUser}/>}
               </StyledTableCell>
             </StyledTableRow>
           ))}

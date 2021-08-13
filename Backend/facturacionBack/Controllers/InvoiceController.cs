@@ -132,7 +132,7 @@ namespace facturacionBack.Controllers
                 throw;
             }
 
-            return Ok(result);
+            return result;
 
         }
 

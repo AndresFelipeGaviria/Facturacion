@@ -111,7 +111,7 @@ const useStyles = makeStyles((theme) => ({
     
   }));
 
-const CrearProducto = () => {
+const CrearProducto = ({refrestRequestProduct}) => {
 
     const classes = useStyles();
 
@@ -136,7 +136,7 @@ const CrearProducto = () => {
     }
     
     axios.post('https://localhost:44361/api/Products/', inforUser)
-    .then((response) =>console.log(response.status))
+    .then((response) =>{console.log(response.status); refrestRequestProduct()})
     .catch((error) =>console.log(error))
    
   }

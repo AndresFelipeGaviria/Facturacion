@@ -37,14 +37,14 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CustomizedTables({allProductos}) {
+export default function CustomizedTables({allProductos, refrestRequestProduct}) {
 
   const [productId, setProductId] = useState();
   const classes = useStyles();
 
   const deleteProduct = (id) => {
     axios.delete(`https://localhost:44361/api/Products/${id}`)
-    .then((response) =>console.log(response.status))
+    .then((response) =>refrestRequestProduct())
     .catch((error) =>console.log(error))
   }
   
@@ -54,9 +54,9 @@ export default function CustomizedTables({allProductos}) {
         <TableHead>
           <TableRow>
             <StyledTableCell>ProductID</StyledTableCell>
-            <StyledTableCell align="right">Nombre</StyledTableCell>
-            <StyledTableCell align="right">Pecio</StyledTableCell>
-            <StyledTableCell align="right">Acciones</StyledTableCell>
+            <StyledTableCell align="center">Nombre</StyledTableCell>
+            <StyledTableCell align="center">Pecio</StyledTableCell>
+            <StyledTableCell align="center">Acciones</StyledTableCell>
 
           </TableRow>
         </TableHead>
@@ -66,9 +66,9 @@ export default function CustomizedTables({allProductos}) {
               <StyledTableCell component="th" scope="row">
                 {row.id}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.name}</StyledTableCell>
-              <StyledTableCell align="right">{row.price}</StyledTableCell>
-              <StyledTableCell align="right">
+              <StyledTableCell align="center">{row.name}</StyledTableCell>
+              <StyledTableCell align="center">{row.price}</StyledTableCell>
+              <StyledTableCell align="center">
               <div className={classes.columnEvent}>
               <Tooltip title="Editar" arrow placement="top">
                 <EditIcon
@@ -85,7 +85,7 @@ export default function CustomizedTables({allProductos}) {
                 />
               </Tooltip>
           </div>
-          {productId === row.id && < EditarProducto productId={row}/>}
+          {productId === row.id && < EditarProducto productId={row} refrestRequestProduct={refrestRequestProduct}/>}
               </StyledTableCell>
             </StyledTableRow>
           ))}

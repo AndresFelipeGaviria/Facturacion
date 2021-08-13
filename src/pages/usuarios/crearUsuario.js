@@ -111,7 +111,7 @@ const useStyles = makeStyles((theme) => ({
     
   }));
 
-const CrearUsuario = () => {
+const CrearUsuario = ({refrestRequest}) => {
 
     const classes = useStyles();
 
@@ -138,7 +138,12 @@ const CrearUsuario = () => {
     }
     console.log(info)
     axios.post('https://localhost:44361/api/Clients/', inforUser)
-    .then((response) =>console.log(response.status))
+    .then((response) =>{
+      setValue('name','');
+      setValue('telephone','');
+      setValue('address','');
+      refrestRequest();
+    })
     .catch((error) =>console.log(error))
    
   }

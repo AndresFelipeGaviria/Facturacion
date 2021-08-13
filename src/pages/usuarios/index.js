@@ -18,12 +18,12 @@ const Usuarios = () => {
     const refrestRequest = () => {setResfresTabled(!refresTabled);console.log('pasee por la peticion')}
     return (
         <div>
-            <Typography>
-                Crear Usuario
+            <Typography style={{textAlign: 'center'}}>
+                Crear Cliente
             </Typography>
-            <CreateUser />
-            <Typography>
-                Usuarios
+            <CreateUser refrestRequest={refrestRequest}/>
+            <Typography style={{textAlign: 'center'}}>
+                Clientes
             </Typography>
             <RegistrosUser 
                 allUsers={allUsers}

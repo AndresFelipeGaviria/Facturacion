@@ -15,14 +15,17 @@ const Productos = () => {
         .catch((error) =>console.log(error))
     },[refresTabled])
 
-    const refrestRequest = () => {setResfresTabled(!refresTabled);console.log('pasee por la peticion')}
+    const refrestRequest = () => setResfresTabled(!refresTabled)
     return (
         <div>
-            <Typography>
+            <Typography style={{textAlign: 'center'}}>
                 Crear Producto
             </Typography>
-            <CreateProduct />
-            <Typography>
+            <CreateProduct 
+                refrestRequestProduct={refrestRequest}
+
+            />
+            <Typography style={{textAlign: 'center'}}>
                 Productos
             </Typography>
             <RegistrosProducts 
