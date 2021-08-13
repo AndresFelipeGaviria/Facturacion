@@ -9,7 +9,8 @@ import TableRow from '@material-ui/core/TableRow';
 import {Paper, Tooltip} from '@material-ui/core';
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from '@material-ui/icons/Delete';
-// import EditarProducto from './editarProducto';
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import moment from 'moment';
 import axios from 'axios';
 
 const StyledTableCell = withStyles((theme) => ({
@@ -62,35 +63,28 @@ export default function TablaFacturas({allProductos}) {
           <TableRow>
             <StyledTableCell>Factura #</StyledTableCell>
             <StyledTableCell align="right">Nombre</StyledTableCell>
-            <StyledTableCell align="right">Fecha</StyledTableCell>
+            <StyledTableCell align="center">Fecha</StyledTableCell>
             <StyledTableCell align="right">Acciones</StyledTableCell>
 
           </TableRow>
         </TableHead>
         <TableBody>
-          {allProductos?.map((row) => (
-            <StyledTableRow key={row.id}>
+          {allInvoice?.map((row) => (
+            <StyledTableRow key={row.invoiceId}>
               <StyledTableCell component="th" scope="row">
-                {row.id}
+                {row.invoiceId}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.name}</StyledTableCell>
-              <StyledTableCell align="right">{row.price}</StyledTableCell>
+              <StyledTableCell align="right">{row.nameClient}</StyledTableCell>
+              <StyledTableCell align="center">{moment(row.date).format('LLL')}</StyledTableCell>
               <StyledTableCell align="right">
               <div className={classes.columnEvent}>
-              <Tooltip title="Editar" arrow placement="top">
-                <EditIcon
+              <Tooltip title="Ver" arrow placement="top">
+                <VisibilityIcon
                   onClick={() =>setProductId(row.id)}
                   className={classes.iconEvent}
                 />
               </Tooltip>
-            &nbsp;&nbsp;
-              <Tooltip title="Anular" arrow placement="top">
-                <DeleteIcon
-                  // onClick={() => deleteProduct(row.id)}
-                //   onClick={() => onDelete(data.id)}
-                  className={classes.iconEvent}
-                />
-              </Tooltip>
+            &nbsp;&nbsp;   
           </div>
           {/* {productId === row.id && < EditarProducto productId={row}/>} */}
               </StyledTableCell>
