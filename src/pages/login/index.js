@@ -109,7 +109,7 @@ export default function SignInSide(props) {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Login
             {isAlert && <Alerta open={true} type={'error'} text={'Usuario no encontrado'}/>}
 
           </Typography>
@@ -148,10 +148,6 @@ export default function SignInSide(props) {
             />
             </FormControl>
             </Grid>
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
@@ -159,19 +155,9 @@ export default function SignInSide(props) {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              Iniciar Sesión
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
             </Grid>
             <Box mt={5}>
             </Box>
